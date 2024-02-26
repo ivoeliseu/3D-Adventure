@@ -2,38 +2,43 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class StateMachine : MonoBehaviour
+
+namespace StateMachine
 {
-    public enum States
+    //State Machine Base
+    //Para criar StateMachine precisa passar um parametro onde parametro = Enum
+    public class StateMachine<T> where T : System.Enum
     {
-        STATE1,
-        STATE2,
-        STATE3
-    }
+        public Dictionary<T, StateBase> dictionaryState;
 
-    public Dictionary<States, StateBase> dictionaryState;
+        private StateBase _currentState;
 
-    private StateBase _currentState;
+        //Essa função retorna o state atual em funcionamento
+        public StateBase CurrentState
+        {
+            get { return _currentState; }
+        }
 
-    private void Awake()
-    {
-        dictionaryState = new Dictionary<States, StateBase>();
-        dictionaryState.Add(States.STATE1, new StateBase());    
-        dictionaryState.Add(States.STATE2, new StateBase());    
-        dictionaryState.Add(States.STATE3, new StateBase());
+        public void Init()
+        {
+            dictionaryState = new Dictionary<T, StateBase>();
+        }
 
-        SwitchState(States.STATE1);
-    }
+        public void RegisterStates(T typeEnum, StateBase state)
+        {
+            dictionaryState.Add(typeEnum, state);
+        }
 
-    private void SwitchState(States state)
-    {
-        if (_currentState != null) _currentState.OnStateExit();
-        _currentState = dictionaryState[state];
-        _currentState.OnStateEnter();
-    }
+        public void SwitchState(T state)
+        {
+            if (_currentState != null) _currentState.OnStateExit();
+            _currentState = dictionaryState[state];
+            _currentState.OnStateEnter();
+        }
 
-    private void Update()
-    {
-        if (_currentState != null) _currentState.OnStateStay();
+        public void Update()
+        {
+            if (_currentState != null) _currentState.OnStateStay();
+        }
     }
 }
