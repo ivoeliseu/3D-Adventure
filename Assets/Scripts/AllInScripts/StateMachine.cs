@@ -12,6 +12,7 @@ namespace StateMachine
         public Dictionary<T, StateBase> dictionaryState;
 
         private StateBase _currentState;
+        private string _translateState;
 
         //Essa função retorna o state atual em funcionamento
         public StateBase CurrentState
