@@ -7056,7 +7056,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1337419375}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.27498984, y: -0.000000016543023, z: 0.0000000047315787, w: 0.9614472}
+  m_LocalRotation: {x: 0.27498984, y: 0.00000001654303, z: -0.0000000047315805, w: 0.9614472}
   m_LocalPosition: {x: 5.2188416, y: 11.209196, z: -11.420269}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -8084,7 +8084,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1500100153}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.27498984, y: -0.000000016543023, z: 0.0000000047315787, w: 0.9614472}
+  m_LocalRotation: {x: 0.27498984, y: 0.00000001654303, z: -0.0000000047315805, w: 0.9614472}
   m_LocalPosition: {x: 5.2188416, y: 11.209196, z: -11.420269}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -11877,6 +11877,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1747162019685561927, guid: 8d6666dd524d414479a68a1df9196b23, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 8ad3fe51d402fea41ba898850c8d09fd, type: 2}
     - target: {fileID: 2182580151388815556, guid: 8d6666dd524d414479a68a1df9196b23, type: 3}
       propertyPath: m_Name
       value: PFB_Enemy_Type_02
