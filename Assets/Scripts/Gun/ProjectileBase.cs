@@ -22,6 +22,16 @@ public class ProjectileBase : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
+        //Se colidir com algum objeto com interface de dano, aplica dano
+        var damageable = collision.transform.GetComponent<DamageInterface>();
 
+        //transfere o valor do dano do projétil para o objeto.
+        if (damageable != null)
+        {
+            damageable.Damage(damageAmount);
+
+            //Se colidir, destrói a bala
+            Destroy(gameObject);
+        }
     }
 }

@@ -8,7 +8,7 @@ public class PlayerAbilityShoot : PlayerAbilityBase
 {
     
     public List<GunBase> gunBase;
-    public Transform gunPosition;
+    public Transform gunPosition; //Onde a arma irá spawnar no personagem
     public KeyCode gun1 = KeyCode.R;
     public KeyCode gun2 = KeyCode.T;
     public KeyCode gun3 = KeyCode.Y;
@@ -50,9 +50,7 @@ public class PlayerAbilityShoot : PlayerAbilityBase
 
     private void CreateGun(int gunIndex)
     {
-        if (_currentGun != null) Destroy(_currentGun);
-
-        _currentGun = Instantiate(gunBase[gunIndex], gunPosition);
+        _currentGun = gunBase[gunIndex];
 
         _currentGun.transform.localPosition = _currentGun.transform.localEulerAngles = Vector3.zero;
     }
