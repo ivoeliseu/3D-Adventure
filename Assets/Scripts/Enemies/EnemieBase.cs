@@ -12,6 +12,7 @@ namespace Enemy
         public Collider enemieCollider;
         public ParticleSystem particles;
         public FlashColor flashColor;
+        public UIEnemyUpdate uiUpdate;
 
         [SerializeField] private float _currentLife;
 
@@ -67,6 +68,8 @@ namespace Enemy
             {
                 Kill();
             }
+
+            uiUpdate.UpdateValue(startLife, _currentLife);
         }
 
         //DEBUG
