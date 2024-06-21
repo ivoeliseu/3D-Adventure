@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class Player : MonoBehaviour
+public class Player : MonoBehaviour, DamageInterface
 {
     [Header("Player Controller")]
     public CharacterController characterController;
@@ -13,6 +13,8 @@ public class Player : MonoBehaviour
     public float jumpSpeed = 15;
     public KeyCode jumpButton = KeyCode.Space;
 
+    private float _vSpeed = 0f;
+
     [Header("Run Setup")]
     public KeyCode runButton = KeyCode.LeftShift;
     public float runSpeed = 1.5f;
@@ -20,7 +22,10 @@ public class Player : MonoBehaviour
     [Header("Animator")]
     public Animator animator;
 
-    private float _vSpeed = 0f;
+    [Header("Flash")]
+    public List <FlashColor> flashColors;
+
+
     private void Update()
     {
         PlayerMovement();
@@ -79,6 +84,18 @@ public class Player : MonoBehaviour
                 _vSpeed = jumpSpeed;
             }
         }
+    }
+    #endregion
+
+    #region PLAYER LIFE
+    public void Damage(float damage)
+    {
+        flashColors.ForEach(i => i.Flash());
+    }
+
+    public void Damage(float damage, Vector3 dir)
+    {
+        Damage(damage);
     }
     #endregion
 }
