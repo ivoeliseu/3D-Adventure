@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using StateMachine;
 using DG.Tweening;
+using System;
+using Unity.VisualScripting;
 
 namespace Boss
 {
@@ -12,7 +14,8 @@ namespace Boss
         INIT,
         IDLE,
         WALK,
-        ATTACK
+        ATTACK,
+        DEATH
     }
 
 
@@ -22,16 +25,24 @@ namespace Boss
         public float startAnimationDuration = .5f;
         public Ease startingAnimationEase = Ease.OutBack;
 
+        [Header("Attack")]
+        public int attackAmount = 5;
+        public float timeBetweenAttacks = 1f;
+
         [Header("Coroutine")]
         public float speed = 15f;
         public List<Transform> waypoints;
+
+        public HealthBase healthBase;
 
         private StateMachine<BossAction> stateMachine;
 
         private void Awake()
         {
             Init();
+            healthBase.OnKill += OnBossKill;
         }
+
         private void Init()
         {
             stateMachine = new StateMachine<BossAction>();
@@ -39,21 +50,56 @@ namespace Boss
 
             stateMachine.RegisterStates(BossAction.INIT, new BossStateInit());
             stateMachine.RegisterStates(BossAction.WALK, new BossStateWalk());
+            stateMachine.RegisterStates(BossAction.ATTACK, new BossStateAttack());
+            stateMachine.RegisterStates(BossAction.DEATH, new BossStateDeath());
         }
 
-        #region BOSS MOVIMENT
-        public void GoToRandomPoint()
+        #region BOSS
+        private void OnBossKill(HealthBase h)
         {
-            StartCoroutine(GoToPointCoroutine(waypoints[Random.Range(0, waypoints.Count)]));
+            SwitchState(BossAction.DEATH);
         }
-        IEnumerator GoToPointCoroutine(Transform t)
+        #endregion
+
+        #region ATTACK
+        public void StartAttack(Action endCallback = null)
+        {
+            StartCoroutine(AttackCoroutine(endCallback));
+        }
+
+        IEnumerator AttackCoroutine(Action endCallBack)
+        {
+            int attacks = 0;
+            while (attacks < attackAmount)
+            {
+                attacks++;
+                transform.DOScale(1.1f, .1f).SetLoops(2, LoopType.Yoyo);
+                yield return new WaitForSeconds(timeBetweenAttacks);
+            }
+
+            endCallBack?.Invoke();
+        }
+        #endregion
+        #region BOSS MOVIMENT
+        public void GoToRandomPoint(Action onArrive)
+        {
+            StartCoroutine(GoToPointCoroutine(waypoints[UnityEngine.Random.Range(0, waypoints.Count)], onArrive));
+        }
+        IEnumerator GoToPointCoroutine(Transform t, Action onArrive)
         {
             while(Vector3.Distance(transform.position, t.position) > 1f)
             {
                 transform.position = Vector3.MoveTowards(transform.position, t.position, Time.deltaTime * speed);
                 yield return new WaitForEndOfFrame();
             }
+            onArrive?.Invoke();
         }
+
+        private void OnTriggerEnter(Collider other)
+        {
+            SwitchState(BossAction.WALK);
+        }
+
         #endregion
         #region ANIMATION
         public void StartInitAnimation()
@@ -73,8 +119,13 @@ namespace Boss
         {
             SwitchState(BossAction.WALK);
         }
-        #endregion
 
+        [NaughtyAttributes.Button]
+        private void SwitchAttack()
+        {
+            SwitchState(BossAction.ATTACK);
+        }
+        #endregion
         #region STATE MACHINE
         public void SwitchState(BossAction state)
         {
