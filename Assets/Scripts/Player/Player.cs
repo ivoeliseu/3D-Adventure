@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class Player : MonoBehaviour, DamageInterface
+public class Player : MonoBehaviour//, DamageInterface
 {
     [Header("Player Controller")]
     public CharacterController characterController;
@@ -24,6 +24,25 @@ public class Player : MonoBehaviour, DamageInterface
 
     [Header("Flash")]
     public List <FlashColor> flashColors;
+
+    [Header("Life")]
+    public List<Collider> colliders;
+    public HealthBase healthBase;
+    
+
+    private bool _alive = true;
+
+    private void OnValidate()
+    {
+        if (healthBase == null) healthBase = GetComponent<HealthBase>();
+    }
+
+    private void Awake()
+    {
+        OnValidate();
+        healthBase.OnDamage += Damage;
+        healthBase.OnKill += OnKill;
+    }
 
 
     private void Update()
@@ -88,14 +107,54 @@ public class Player : MonoBehaviour, DamageInterface
     #endregion
 
     #region PLAYER LIFE
-    public void Damage(float damage)
+    public void Damage(HealthBase h)
     {
         flashColors.ForEach(i => i.Flash());
+
     }
 
     public void Damage(float damage, Vector3 dir)
     {
-        Damage(damage);
+        //Damage(damage);
+    }
+
+    private void OnKill(HealthBase h)
+    {
+        //Checa se player está vivo para tocar animação de morte
+        if (_alive)
+        {
+            _alive = false;
+            animator.SetTrigger("Death");
+            colliders.ForEach(i => i.enabled = false);
+
+            Invoke(nameof(Revive), 3f);
+        }
+        
+    }
+
+    private void Revive()
+    {
+        _alive = true;
+        healthBase.ResetLife();
+        animator.SetTrigger("Respawn");
+        Respawn();
+        Invoke(nameof(TurnOnColliders), .1f);
+    }
+
+    //Essa função existe para não bugar com o colisor e dar tempo de respawnar no local correto
+    private void TurnOnColliders()
+    {
+        colliders.ForEach(i => i.enabled = true);
+    }
+
+    [NaughtyAttributes.Button]
+    public void Respawn()
+    {
+
+        if (CheckpointManager.Instance.HasCheckpoint())
+        {
+            transform.position = CheckpointManager.Instance.GetLastCheckpointPosition();
+        }
     }
     #endregion
 }

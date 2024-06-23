@@ -37,6 +37,11 @@ namespace Boss
 
         private StateMachine<BossAction> stateMachine;
 
+        private void OnValidate()
+        {
+            if (healthBase == null) healthBase = GetComponent<HealthBase>();
+        }
+
         private void Awake()
         {
             Init();
@@ -97,7 +102,10 @@ namespace Boss
 
         private void OnTriggerEnter(Collider other)
         {
-            SwitchState(BossAction.WALK);
+            if (other.transform.tag == "Player")
+            {
+                SwitchState(BossAction.WALK);
+            }
         }
 
         #endregion

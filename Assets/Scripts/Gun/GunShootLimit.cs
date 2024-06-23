@@ -5,7 +5,7 @@ using System.Linq;
 
 public class GunShootLimit : GunBase
 {
-    public List<UIGunUpdate> uiGunUpdate;
+    public List<UIFillUpdate> uiGunUpdate;
 
     public float maxShoot = 5f;
     public float timeToRecharge = 1f;
@@ -70,7 +70,8 @@ public class GunShootLimit : GunBase
     }
     private void GetAllUIs()
     {
-        uiGunUpdate = GameObject.FindObjectsOfType<UIGunUpdate>().ToList();
+        //Isso está causando o bug que atualiza a ui de vida do jogador ao invés de somente o contator de balas
+        uiGunUpdate = GameObject.FindObjectsOfType<UIFillUpdate>().ToList();
     }
 
 }

@@ -131,7 +131,7 @@ namespace Enemy
             //Se for o player que colidiu, causa dano.
             if(p != null)
             {
-                p.Damage(damageToPlayer);
+                p.healthBase.Damage(damageToPlayer);
             }
         }
     }

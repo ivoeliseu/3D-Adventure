@@ -6,7 +6,7 @@ using UnityEngine;
 using static Cinemachine.CinemachineTriggerAction.ActionSettings;
 using static UnityEngine.ParticleSystem;
 
-public class HealthBase : MonoBehaviour
+public class HealthBase : MonoBehaviour, DamageInterface //Nas aulas estava como Idamageble
 {
     public float startLife = 10f;
     public bool destroynOnKill = false;
@@ -14,6 +14,8 @@ public class HealthBase : MonoBehaviour
 
     public Action<HealthBase> OnDamage;
     public Action<HealthBase> OnKill;
+
+    public UIFillUpdate healthUpdate;
 
     public void Awake()
     {
@@ -34,9 +36,9 @@ public class HealthBase : MonoBehaviour
         {
             //Destruirá o objeto após alguns segundos, para executar animação de morte
             Destroy(gameObject, 3f);
-
-            OnKill?.Invoke(this);
         }
+        
+        OnKill?.Invoke(this);
     }
 
     public void Damage()
@@ -52,6 +54,18 @@ public class HealthBase : MonoBehaviour
             Kill();
         }
 
+        UpdateUI();
         OnDamage?.Invoke(this);
+    }
+
+    //Interface de dano
+    public void Damage(float damage, Vector3 dir)
+    {
+        Damage(damage);
+    }
+
+    private void UpdateUI()
+    {
+        healthUpdate.UpdateValue((float) _currentLife / startLife);
     }
 }
