@@ -15,7 +15,7 @@ public class GunShootLimit : GunBase
 
     private void Awake()
     {
-        GetAllUIs();
+        //GetAllUIs();
     }
 
     protected override IEnumerator ShootCoroutine()
