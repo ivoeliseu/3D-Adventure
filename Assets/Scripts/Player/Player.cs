@@ -155,6 +155,7 @@ public class Player : MonoBehaviour//, DamageInterface
         {
             transform.position = CheckpointManager.Instance.GetLastCheckpointPosition();
         }
+        
     }
     #endregion
 }

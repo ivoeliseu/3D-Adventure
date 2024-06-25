@@ -28,6 +28,7 @@ public class HealthBase : MonoBehaviour, DamageInterface //Nas aulas estava como
     public void ResetLife()
     {
         _currentLife = startLife;
+        healthUpdate.UpdateValue(_currentLife);
     }
 
     protected virtual void Kill()
