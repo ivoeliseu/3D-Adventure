@@ -21,6 +21,7 @@ public class HealthBase : MonoBehaviour, DamageInterface //Nas aulas estava como
     {
         Init();
     }
+
     public void Init()
     {
         ResetLife();
