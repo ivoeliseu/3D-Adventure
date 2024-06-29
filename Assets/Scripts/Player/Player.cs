@@ -111,6 +111,7 @@ public class Player : MonoBehaviour//, DamageInterface
     {
         flashColors.ForEach(i => i.Flash());
         EffectsManager.Instance.ChangeVignette();
+        ShakeCamera.Instance.Shake();
 
     }
 
