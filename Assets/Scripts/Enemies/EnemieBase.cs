@@ -84,16 +84,17 @@ namespace Enemy
         //DEBUG
         public virtual void Update()
         {
-            if (Input.GetKeyDown(KeyCode.L)) 
+            /*if (Input.GetKeyDown(KeyCode.L)) 
             {
                 OnDamage(5f);
-            }
+            }*/
 
             if (lookAtPlayer)
             {
                 transform.LookAt(_player.transform.position);
             }
         }
+        
 
         private void SpawnAnimation()
         {

@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class FlashColor : MonoBehaviour
 {
-    //Itens que vão mudar de cor
+    //Items que vão mudar de cor
     public MeshRenderer meshRenderer;
     public SkinnedMeshRenderer skinnedMeshRenderer;
 

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class Player : MonoBehaviour//, DamageInterface
+public class Player : Singleton<Player>
 {
     [Header("Player Controller")]
     public CharacterController characterController;
@@ -37,8 +37,9 @@ public class Player : MonoBehaviour//, DamageInterface
         if (healthBase == null) healthBase = GetComponent<HealthBase>();
     }
 
-    private void Awake()
+    public override void Awake()
     {
+        base.Awake();
         OnValidate();
         healthBase.OnDamage += Damage;
         healthBase.OnKill += OnKill;

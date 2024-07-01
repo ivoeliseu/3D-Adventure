@@ -10,7 +10,7 @@ public class CheckpointBase : MonoBehaviour
 
     private bool checkpointActive = false;
 
-    private string _checkpointKey = "CheckpointKey";
+    //private string _checkpointKey = "CheckpointKey";
     private void OnTriggerEnter(Collider other)
     {
         if (!checkpointActive && other.transform.tag == "Player")
