@@ -70,7 +70,7 @@ MonoBehaviour:
   itemType: 0
   compareTag: Player
   itemParticleSystem: {fileID: 0}
-  timeToHide: 0.35
+  timeToHide: 0.15
   graphicItem: {fileID: 0}
   itemCollider: {fileID: 9127855056759594723}
   audioSource: {fileID: 0}

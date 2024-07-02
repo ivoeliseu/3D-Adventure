@@ -43,6 +43,7 @@ public class HealthBase : MonoBehaviour, DamageInterface //Nas aulas estava como
         OnKill?.Invoke(this);
     }
 
+    [NaughtyAttributes.Button]
     public void Damage()
     {
         Damage(5);
@@ -68,6 +69,7 @@ public class HealthBase : MonoBehaviour, DamageInterface //Nas aulas estava como
 
     private void UpdateUI()
     {
+        if (healthUpdate == null) return;
         healthUpdate.UpdateValue((float) _currentLife / startLife);
     }
 }
