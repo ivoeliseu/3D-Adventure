@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using Cloth;
 
 public class Player : Singleton<Player>
 {
@@ -28,7 +29,9 @@ public class Player : Singleton<Player>
     [Header("Life")]
     public List<Collider> colliders;
     public HealthBase healthBase;
-    
+
+    [Space]
+    [SerializeField] private ClothChanger clothChanger;
 
     private bool _alive = true;
 
@@ -161,4 +164,29 @@ public class Player : Singleton<Player>
         
     }
     #endregion
+
+    public void ChangeSpeed(float speed, float duration)
+    {
+        StartCoroutine(ChangeSpeedCoroutine(speed, duration));
+    }
+
+    IEnumerator ChangeSpeedCoroutine(float localSpeed, float duration)
+    {
+        var defaultSpeed = movementSpeed;
+        movementSpeed = localSpeed;
+        yield return new WaitForSeconds(duration);
+        movementSpeed = defaultSpeed;
+    }
+
+    public void ChangeTexture(ClothSetup setup, float duration)
+    {
+        StartCoroutine(ChangeTextureCoroutine(setup, duration));
+    }
+
+    IEnumerator ChangeTextureCoroutine(ClothSetup setup, float duration)
+    {
+        clothChanger.ChangeTexture(setup);
+        yield return new WaitForSeconds(duration);
+        clothChanger.ResetTexture();
+    }
 }

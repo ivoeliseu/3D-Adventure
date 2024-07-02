@@ -1,10 +1,10 @@
 using Animation;
+using Cloth;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static Cinemachine.CinemachineTriggerAction.ActionSettings;
-using static UnityEngine.ParticleSystem;
+using Cloth;
 
 public class HealthBase : MonoBehaviour, DamageInterface //Nas aulas estava como Idamageble
 {
@@ -16,6 +16,7 @@ public class HealthBase : MonoBehaviour, DamageInterface //Nas aulas estava como
     public Action<HealthBase> OnKill;
 
     public UIFillUpdate healthUpdate;
+    public float damageMultiplier = 1;
 
     public void Awake()
     {
@@ -50,7 +51,7 @@ public class HealthBase : MonoBehaviour, DamageInterface //Nas aulas estava como
     }
     public void Damage(float damage)
     {
-        _currentLife -= damage;
+        _currentLife -= damage * damageMultiplier;
 
         if (_currentLife <= 0)
         {
@@ -71,5 +72,18 @@ public class HealthBase : MonoBehaviour, DamageInterface //Nas aulas estava como
     {
         if (healthUpdate == null) return;
         healthUpdate.UpdateValue((float) _currentLife / startLife);
+    }
+
+    public void ChangeDamageMultiplier(float damage, float duration)
+    {
+        StartCoroutine(ChangeDamageMultiplierCoroutine(damageMultiplier, duration));
+    }
+
+    IEnumerator ChangeDamageMultiplierCoroutine(float damageMultiplier, float duration)
+    {
+        //This dis que é o damage do scritp mesmo.
+        this.damageMultiplier = damageMultiplier;
+        yield return new WaitForSeconds(duration);
+        this.damageMultiplier = 1;
     }
 }
