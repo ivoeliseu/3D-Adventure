@@ -13,6 +13,7 @@ public class DestructablesItemsBase : MonoBehaviour
     public int dropCoinsAmount = 10;
     public GameObject coinPrefab;
     public Transform dropPosition;
+    public ParticleSystem destructableObjectParticle;
 
     private void OnValidate()
     {
@@ -30,9 +31,10 @@ public class DestructablesItemsBase : MonoBehaviour
         //Faz o objeto balançar quando tomar dano
         gameObject.transform.DOShakeScale(shakeDuration, Vector3.up/2, shakeForce);
         DropCoins();
-    }
+        destructableObjectParticle.Play();
+}
 
-    private void DropCoins()
+private void DropCoins()
     {
         //Instancia a moeda na posição de dropPosition
         var i = Instantiate(coinPrefab);

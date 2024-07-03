@@ -22,6 +22,7 @@ public class Player : Singleton<Player>
 
     [Header("Animator")]
     public Animator animator;
+    public bool _jumping;
 
     [Header("Flash")]
     public List <FlashColor> flashColors;
@@ -101,10 +102,24 @@ public class Player : Singleton<Player>
         //Controla o pulo. Se estiver no chão, personagem poderá pular;
         if (characterController.isGrounded)
         {
+            if (_jumping)
+            {
+                _jumping = false;
+                animator.SetTrigger("Land");
+            }
+
             _vSpeed = 0;
             if (Input.GetKeyDown(jumpButton))
             {
                 _vSpeed = jumpSpeed;
+
+                if (!_jumping)
+                {
+                    _jumping = true;
+                    animator.SetTrigger("Jump");
+                }
+
+                
             }
         }
     }
@@ -142,7 +157,7 @@ public class Player : Singleton<Player>
     {
         _alive = true;
         healthBase.ResetLife();
-        animator.SetTrigger("Respawn");
+        animator.SetTrigger("Revive");
         Respawn();
         Invoke(nameof(TurnOnColliders), .1f);
     }

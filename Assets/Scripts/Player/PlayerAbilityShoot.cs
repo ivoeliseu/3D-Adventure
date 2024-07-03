@@ -14,6 +14,8 @@ public class PlayerAbilityShoot : PlayerAbilityBase
     public KeyCode gun3 = KeyCode.Y;
     
     private GunBase _currentGun;
+
+    public FlashColor flashColor;
     protected override void Init()
     {
         base.Init();
@@ -56,13 +58,14 @@ public class PlayerAbilityShoot : PlayerAbilityBase
     }
     private void StartShoot()
     {
-        Debug.Log("Shoot");
+        //Debug.Log("Shoot");
         _currentGun.StartShoot();
+        flashColor?.Flash();
     }
 
     private void CancelShoot()
     {
-        Debug.Log("Cancel");
+        //Debug.Log("Cancel");
         _currentGun.StopShoot();
     }
 }
