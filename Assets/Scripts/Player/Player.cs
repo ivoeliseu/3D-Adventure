@@ -129,6 +129,7 @@ public class Player : Singleton<Player>
     public void Damage(HealthBase h)
     {
         flashColors.ForEach(i => i.Flash());
+        SaveManager.Instance.SavePlayerLife();
         EffectsManager.Instance.ChangeVignette();
         ShakeCamera.Instance.Shake();
 

@@ -5131,15 +5131,31 @@ MonoBehaviour:
   startLife: 20
   timeToDie: 2
   damageToPlayer: 1
+  lookAtPlayer: 0
   _currentLife: 0
   enemieCollider: {fileID: 7426102238055900852}
   particles: {fileID: 5320558190251765316}
   flashColor: {fileID: 4877513487584200921}
-  uiUpdate: {fileID: 0}
+  uiUpdate: {fileID: 6440334640120209502}
   startAnimationDuration: 0.2
   StartAnimationEase: 27
   spawnAnimation: 1
   _animationBase: {fileID: 5894627409279998830}
+  onKillEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 4164594636915171974}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
 --- !u!114 &5894627409279998830
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5180,6 +5196,7 @@ MonoBehaviour:
   skinnedMeshRenderer: {fileID: 0}
   color: {r: 1, g: 0, b: 0, a: 1}
   duration: 0.1
+  colorParameter: _EmissionColor
 --- !u!1 &6751238700621121724
 GameObject:
   m_ObjectHideFlags: 0

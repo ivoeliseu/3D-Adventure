@@ -1,0 +1,9 @@
+{
+    "lastLevel": 1,
+    "coins": 20.0,
+    "health": 2.0,
+    "checkpoint": 2,
+    "playerLife": 7.0,
+    "lastCloth": "FORCE",
+    "playerName": "Ivo"
+}

@@ -10,7 +10,7 @@ public class HealthBase : MonoBehaviour, DamageInterface //Nas aulas estava como
 {
     public float startLife = 10f;
     public bool destroynOnKill = false;
-    [SerializeField] private float _currentLife;
+    [SerializeField] public float currentLife;
 
     public Action<HealthBase> OnDamage;
     public Action<HealthBase> OnKill;
@@ -29,8 +29,8 @@ public class HealthBase : MonoBehaviour, DamageInterface //Nas aulas estava como
     }
     public void ResetLife()
     {
-        _currentLife = startLife;
-        healthUpdate.UpdateValue(_currentLife);
+        currentLife = startLife;
+        healthUpdate.UpdateValue(currentLife);
     }
 
     protected virtual void Kill()
@@ -51,9 +51,9 @@ public class HealthBase : MonoBehaviour, DamageInterface //Nas aulas estava como
     }
     public void Damage(float damage)
     {
-        _currentLife -= damage * damageMultiplier;
+        currentLife -= damage * damageMultiplier;
 
-        if (_currentLife <= 0)
+        if (currentLife <= 0)
         {
             Kill();
         }
@@ -71,7 +71,7 @@ public class HealthBase : MonoBehaviour, DamageInterface //Nas aulas estava como
     private void UpdateUI()
     {
         if (healthUpdate == null) return;
-        healthUpdate.UpdateValue((float) _currentLife / startLife);
+        healthUpdate.UpdateValue((float) currentLife / startLife);
     }
 
     public void ChangeDamageMultiplier(float damage, float duration)

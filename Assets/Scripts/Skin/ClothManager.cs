@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -18,7 +19,10 @@ namespace Cloth
 
         public ClothSetup GetSetupByType(ClothType clothType)
         {
+            string lastCloth = clothType.ToString();
+            SaveManager.Instance.SaveCloth(lastCloth);
             return clothSetups.Find(i => i.clothType == clothType);
+            
         }
     }
 

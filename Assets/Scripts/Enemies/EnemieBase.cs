@@ -1,6 +1,7 @@
 using Animation;
 using DG.Tweening;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace Enemy
 {
@@ -28,6 +29,9 @@ namespace Enemy
         [SerializeField] private AnimationBase _animationBase;
 
         private Player _player;
+
+        [Header("Events")]
+        public UnityEvent onKillEvent;
 
         private void Awake()
         {
@@ -64,6 +68,7 @@ namespace Enemy
             //Destruirá o objeto após alguns segundos, para executar animação de morte
             Destroy(gameObject, timeToDie);
             PlayAnimationByTrigger(AnimationType.DEATH);
+            onKillEvent?.Invoke();
         }
 
         public void OnDamage(float damage)
