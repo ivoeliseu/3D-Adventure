@@ -5,24 +5,27 @@ using UnityEngine;
 
 public class EndGame : MonoBehaviour
 {
-    public List <GameObject> endGameObjects;
+    //public List <GameObject> endGameObjects;
+    public GameObject endScreen;
     public int currentLevel = 1;
-    [SerializeField]private bool _endGame = false;
+    //[SerializeField]private bool _endGame = false;
 
     private void Awake()
     {
-        endGameObjects.ForEach(i => i.SetActive(false));
+        //endGameObjects.ForEach(i => i.SetActive(false));
     }
     private void OnTriggerEnter(Collider other)
     {
-        if (_endGame == true && other.transform.tag == "Player")
+        if (/*_endGame == true &&*/ other.transform.tag == "Player")
         {
             ShowEndGame();
         }
     }
     private void ShowEndGame()
     {
-        _endGame = true;
+
+        endScreen.SetActive(true);
+        /* _endGame = true;
         //endGameObjects.ForEach(i => i.SetActive(true));
 
         foreach(var i in endGameObjects) 
@@ -32,5 +35,6 @@ public class EndGame : MonoBehaviour
             SaveManager.Instance.SaveLastLevel(currentLevel);
             SaveManager.Instance.SaveItems();
         }
+        */
     }
 }

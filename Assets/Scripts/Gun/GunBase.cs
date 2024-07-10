@@ -24,6 +24,7 @@ public class GunBase : MonoBehaviour
 
     public virtual void Shoot()
     {
+        SFXPool.Instance.Play(SFXType.TYPE_03);
         var projectile = Instantiate(prefabProjectile);
         projectile.transform.position = positionToShoot.position;
         projectile.transform.rotation = positionToShoot.rotation;

@@ -202,9 +202,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f2a91f1d24337e5489186acb3e2a1580, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startLife: 10
+  startLife: 3
   destroynOnKill: 1
-  _currentLife: 0
+  timeToDestroy: 0.25
+  currentLife: 0
   healthUpdate: {fileID: 5198208439080636887}
   damageMultiplier: 1
 --- !u!136 &2289141598931953528

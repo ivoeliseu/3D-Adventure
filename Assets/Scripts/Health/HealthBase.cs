@@ -10,6 +10,7 @@ public class HealthBase : MonoBehaviour, DamageInterface //Nas aulas estava como
 {
     public float startLife = 10f;
     public bool destroynOnKill = false;
+    public float timeToDestroy = 3f;
     [SerializeField] public float currentLife;
 
     public Action<HealthBase> OnDamage;
@@ -38,7 +39,7 @@ public class HealthBase : MonoBehaviour, DamageInterface //Nas aulas estava como
         if (destroynOnKill)
         {
             //Destruirá o objeto após alguns segundos, para executar animação de morte
-            Destroy(gameObject, 3f);
+            Destroy(gameObject, timeToDestroy);
         }
         
         OnKill?.Invoke(this);
@@ -81,7 +82,7 @@ public class HealthBase : MonoBehaviour, DamageInterface //Nas aulas estava como
 
     IEnumerator ChangeDamageMultiplierCoroutine(float damageMultiplier, float duration)
     {
-        //This dis que é o damage do scritp mesmo.
+        //This diz que é o damage do scritp mesmo.
         this.damageMultiplier = damageMultiplier;
         yield return new WaitForSeconds(duration);
         this.damageMultiplier = 1;

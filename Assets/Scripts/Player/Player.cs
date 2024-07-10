@@ -140,7 +140,7 @@ public class Player : Singleton<Player>
         //Damage(damage);
     }
 
-    private void OnKill(HealthBase h)
+    public void OnKill(HealthBase h)
     {
         //Checa se player está vivo para tocar animação de morte
         if (_alive)
@@ -204,5 +204,13 @@ public class Player : Singleton<Player>
         clothChanger.ChangeTexture(setup);
         yield return new WaitForSeconds(duration);
         clothChanger.ResetTexture();
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Pit"))
+        {
+            Respawn();
+        }
     }
 }

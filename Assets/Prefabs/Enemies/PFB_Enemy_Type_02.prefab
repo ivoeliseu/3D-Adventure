@@ -557,7 +557,7 @@ SpriteRenderer:
   m_Size: {x: 0.92, y: 0.49}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!1 &4159186731093818026
@@ -792,6 +792,7 @@ MonoBehaviour:
   skinnedMeshRenderer: {fileID: 0}
   color: {r: 0.59674263, g: 0.8380624, b: 0.8490566, a: 1}
   duration: 0.1
+  colorParameter: _EmissionColor
 --- !u!114 &7502363114608361257
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -807,6 +808,7 @@ MonoBehaviour:
   startLife: 10
   timeToDie: 2
   damageToPlayer: 1
+  lookAtPlayer: 0
   _currentLife: 0
   enemieCollider: {fileID: 9020246879030283933}
   particles: {fileID: 5780242208611564893}
@@ -816,6 +818,9 @@ MonoBehaviour:
   StartAnimationEase: 27
   spawnAnimation: 1
   _animationBase: {fileID: 3341818762798300354}
+  onKillEvent:
+    m_PersistentCalls:
+      m_Calls: []
   waypoints:
   - {fileID: 8748336512755244853}
   - {fileID: 4159186731093818026}
@@ -904,7 +909,7 @@ SpriteRenderer:
   m_Size: {x: 0.47, y: 0.81}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!1 &5259049103668684268
@@ -1378,10 +1383,10 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.42, y: 0.82}
+  m_Size: {x: 0.47, y: 0.81}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!1 &7935738695399479472
@@ -6728,9 +6733,9 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.59, y: 0.62}
+  m_Size: {x: 0.92, y: 0.49}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0

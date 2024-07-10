@@ -1,7 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor.UIElements;
 using UnityEngine;
 
 namespace Items
@@ -9,6 +5,7 @@ namespace Items
 
     public class ItemCollectableBase : MonoBehaviour
     {
+        public SFXType sfxType;
         public ItemType itemType;
 
         public string compareTag = "Player";
@@ -34,6 +31,11 @@ namespace Items
             }
         }
 
+        private void PlaySFX()
+        {
+            SFXPool.Instance.Play(sfxType);
+        }
+
         protected virtual void Collect()
         {
             //Desativa o collider do item
@@ -50,6 +52,7 @@ namespace Items
 
         protected virtual void OnCollect() 
         {
+            PlaySFX();
             if (itemParticleSystem != null) itemParticleSystem.Play();
             if (audioSource != null) audioSource.Play();
             ItemManager.Instance.AddByType(itemType);

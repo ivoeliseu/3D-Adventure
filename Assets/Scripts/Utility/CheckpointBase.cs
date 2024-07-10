@@ -16,6 +16,7 @@ public class CheckpointBase : MonoBehaviour
         if (!checkpointActive && other.transform.tag == "Player")
         {
             CheckCheckpoints();
+            SFXPool.Instance.Play(SFXType.TYPE_02);
         }
         
     }
